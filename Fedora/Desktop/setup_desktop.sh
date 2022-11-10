@@ -5,6 +5,8 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
+dnf remove nano-default-editor
+
 # Install KDE Packages
 dnf install \
   @"base-x" \
@@ -83,6 +85,7 @@ dnf install \
   sni-qt \
   spectacle \
   vim \
+  vim-default-editor \
   xorg-x11-drv-libinput
 
 systemctl enable sddm
