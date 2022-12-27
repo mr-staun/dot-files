@@ -56,7 +56,6 @@ dnf install \
   kwebkitpart \
   kwin \
   NetworkManager-config-connectivity-fedora \
-  numix-icon-theme-circle \
   pam-kwallet \
   phonon-qt5-backend-gstreamer \
   pinentry-qt \
