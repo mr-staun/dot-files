@@ -10,7 +10,11 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
+echo "Removing unnecessary packages"
+
 dnf remove nano-default-editor
+
+echo "Installing extra packages"
 
 # Install KDE Packages
 dnf install \

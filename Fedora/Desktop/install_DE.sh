@@ -10,8 +10,12 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
+echo "Updating existing packages"
+
 # Update existing packages
 dnf update
+
+echo "Installing Desktop Environment"
 
 # Install KDE Packages
 dnf install \

@@ -5,5 +5,7 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
+echo "Enabling RPM Fusion Non-Free repository"
+
 dnf install \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
