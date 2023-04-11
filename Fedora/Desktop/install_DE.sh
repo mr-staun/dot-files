@@ -1,11 +1,17 @@
 #!/bin/env bash
+
+# This script is based on the following repo
+# https://github.com/Zer0CoolX/Fedora-KDE-Minimal-Install-Guide
+
+
 ##### CHECK FOR SUDO or ROOT ##################################
 if ! [ $(id -u) = 0 ]; then
   echo "This script must be run as sudo or root, try again..."
   exit 1
 fi
 
-dnf remove nano-default-editor
+# Update existing packages
+dnf update
 
 # Install KDE Packages
 dnf install \
@@ -13,10 +19,6 @@ dnf install \
   @"Common NetworkManager Submodules" \
   @"Fonts" \
   @"Hardware Support" \
-  @"Input Methods" \
-  @Multimedia \
-  @"Printing Support" \
-  ark \
   bluedevil \
   breeze-gtk \
   breeze-icon-theme \
@@ -24,12 +26,8 @@ dnf install \
   colord-kde \
   cups-pk-helper \
   dolphin \
-  firefox \
-  git \
   glibc-all-langpacks \
   gnome-keyring-pam \
-  gwenview \
-  kcalc \
   kcm_systemd \
   kde-gtk-config \
   kde-partitionmanager \
@@ -44,7 +42,6 @@ dnf install \
   kf5-akonadi-server-mysql \
   kf5-baloo-file \
   kf5-kipi-plugins \
-  kfind \
   khotkeys \
   kmenuedit \
   konsole5 \
@@ -82,10 +79,8 @@ dnf install \
   sddm-kcm \
   setroubleshoot \
   sni-qt \
-  spectacle \
-  vim \
-  vim-default-editor \
   xorg-x11-drv-libinput
+
 
 systemctl enable sddm
 systemctl set-default graphical.target
