@@ -10,8 +10,10 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
-workstation_files_path=workstation
+echo "Installing Nvidia akmod"
 
-/bin/bash enable_non_free_rpm.sh
-/bin/bash $workstation_files_path/install_DE.sh
-/bin/bash $workstation_files_path/install_extras.sh
+# Install KDE Packages
+dnf install \
+  kenel-devel \
+  akmod-nvidia \
+  xorg-x11-drv-nvidia-cuda
