@@ -1,15 +1,9 @@
 #!/bin/bash
-konsole_path=./local/share/konsole
+konsole_path=~/.local/share/konsole
 
-##### CHECK FOR SUDO or ROOT ##################################
-if ! [ $(id -u) = 0 ]; then
-  echo "This script must be run as sudo or root, try again..."
-  exit 1
-fi
-
-dnf install \
-numix-icon-theme-circle
-cascadia-code-font
+sudo dnf install \
+numix-icon-theme-circle \
+cascadia-code-fonts
 
 cp ./terminal/inputrc ~/.inputrc
 cp ./terminal/Edna.colorscheme $konsole_path
