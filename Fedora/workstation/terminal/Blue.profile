@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=Onward
+ColorScheme=Edna
 Font=Cascadia Code,10,-1,5,50,0,0,0,0,0
 
 [General]
