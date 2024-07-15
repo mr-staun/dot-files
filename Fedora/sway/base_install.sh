@@ -18,6 +18,7 @@ dnf install \
     NetworkManager-wifi \
     rofi \
     sway \
-    thunar
+    thunar \
+    vim
 
 echo "Install complete!"
