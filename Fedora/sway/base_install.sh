@@ -9,16 +9,19 @@ echo "Initiating Sway base install"
 
 dnf install \
     firefox \
-    @Fonts \
     foot \
     git \
     @"Hardware Support" \
     htop \
+    imv \
+    jetbrains-mono-fonts \
     lm_sensors \
     NetworkManager-wifi \
     rofi \
     sway \
+    tar \
     thunar \
+    unzip \
     vim
 
 echo "Install complete!"
