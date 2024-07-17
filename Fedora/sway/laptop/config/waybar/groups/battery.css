@@ -1,0 +1,36 @@
+#battery {
+    /* background-color: transparent;
+    border-bottom: 3px solid pink;
+    color: #E0E1DD;
+    padding: 7px 7px;
+    margin: 0 8px; */
+}
+
+#battery.charging {
+    color: #ffffff;
+}
+
+#battery.medium {
+    color: @warning-color;
+    border-bottom-color: @warning-color;
+}
+
+#battery.charging {
+    color: @okay-color;
+    border-bottom-color: @okay-color;
+}
+
+#battery.low {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

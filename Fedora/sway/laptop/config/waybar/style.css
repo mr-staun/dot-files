@@ -1,45 +1,29 @@
+@import "groups/backlight.css";
+@import "groups/battery.css";
+@import "groups/clock.css";
+@import "groups/groups.css";
+@import "groups/network.css";
+@import "groups/system.css";
+
 * {
     border: none;
-    border-radius: 4px;
     /* `ttf-font-awesome` is required to be installed for icons */
-    font-family: "Roboto Mono Medium", Helvetica, Arial, sans-serif;
+    font-family: "Jetbrains Mono", "Font Awesome 6 Free", sans-serif;
 
     /* adjust font-size value to your liking: */
-    font-size: 10px;
+    font-size: 12px;
 
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: #09121C;
     /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: #ffffff;
     /* transition-property: background-color; */
     /* transition-duration: .5s; */
     /* border-radius: 0; */
 }
-
-/* window#waybar.hidden {
-    opacity: 0.2;
-} */
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-/* window#waybar.termite {
-    background-color: #000000;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-} */
 
 #workspaces button {
     /* padding: 0 0.4em; */
@@ -69,22 +53,15 @@ window#waybar.chromium {
     /* border-bottom: 3px solid #ffffff; */
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
 #custom-media,
 #tray,
 #mode,
 #idle_inhibitor,
 #mpd {
+    background-color: #1B263B;
+    color: #E0E1DD;
     padding: 0 10px;
     margin: 6px 3px; 
-    color: #000000;
 }
 
 #window,
@@ -102,21 +79,6 @@ window#waybar.chromium {
     margin-right: 0;
 }
 
-#clock {
-    background-color: #000000;
-    color: white;
-}
-
-#battery {
-    background-color: #000000;
-    color: white;
-}
-
-#battery.charging {
-    color: #ffffff;
-    background-color: #000000;
-}
-
 @keyframes blink {
     to {
         background-color: #ffffff;
@@ -124,53 +86,8 @@ window#waybar.chromium {
     }
 }
 
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 label:focus {
     background-color: #000000;
-}
-
-#cpu {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-#memory {
-    background-color: #000000;
-    color: white;
-}
-
-#backlight {
-    background-color: #000000;
-    color:white;
-}
-
-#network {
-    background-color: #000000;
-    color:white;
-
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
-
-#pulseaudio {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-#pulseaudio.muted {
-    background-color: #000000;
-    color: #ffffff;
 }
 
 #custom-media {
@@ -187,13 +104,6 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
 
 #tray {
     background-color: #2980b9;

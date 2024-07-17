@@ -1,0 +1,18 @@
+@define-color okay-color #7BF768;
+@define-color warning-color #F5F768;
+@define-color critical-color #F25050;
+
+#backlight,
+#battery,
+#clock,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#temperature {
+    background-color: transparent;
+    border-bottom: 3px solid #427D9D;
+    color: #DDF2FD;
+    padding: 7px 7px;
+    margin: 0 8px;
+}
