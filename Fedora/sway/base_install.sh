@@ -28,6 +28,7 @@ dnf install \
     tar \
     thunar \
     unzip \
-    vim
+    vim \
+    waybar
 
 echo "Install complete!"
