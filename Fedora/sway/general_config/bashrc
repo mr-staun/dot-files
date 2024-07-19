@@ -1,0 +1,22 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# Set the number of commands to remember in the command history
+HISTSIZE=10000
+# Set the number of lines to save in the history file
+HISTFILESIZE=10000
+# Ignore commands that start with a space
+HISTCONTROL=ignorespace
+
+# Load inputrc settings
+if [ -f ~/.inputrc ]; then
+    bind -f ~/.inputrc
+fi
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
