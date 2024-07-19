@@ -5,12 +5,17 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
+echo "Enabling repository for notifications"
+dnf copr enable erikreider/SwayNotificationCenter
+
 echo "Initiating Sway base install"
 
 dnf install \
+    bash-completion \
     firefox \
     foot \
     git \
+    gvfs-mtp \
     @"Hardware Support" \
     htop \
     imv \
@@ -19,6 +24,7 @@ dnf install \
     NetworkManager-wifi \
     rofi \
     sway \
+    SwayNotificationCenter \
     tar \
     thunar \
     unzip \
