@@ -1,0 +1,21 @@
+    "include": [
+        "~/.config/waybar/groups/backlight.jsonc",
+        "~/.config/waybar/groups/battery.jsonc",
+        "~/.config/waybar/groups/clock.jsonc",
+        "~/.config/waybar/groups/network.jsonc",
+        "~/.config/waybar/groups/sound.jsonc",
+        "~/.config/waybar/groups/system.jsonc"
+    ],
+    "position": "top",
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+    "modules-center": ["sway/window"],
+    "modules-right": [
+        "group/network_state",
+        "group/system_state",
+        "group/sound_state",
+        "group/backlight_state",
+        "group/battery_state",
+        "group/clock_state",
+        "tray"
+    ],
