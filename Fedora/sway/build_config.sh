@@ -1,53 +1,24 @@
 #/bin/bash
 
-config_dir=~/.config
-target_dir=./laptop/config
+home_config_dir=~/.config
+master_config_dir=./home/config
 
-if [ ! -d  ${config_dir} ]; then
-    echo "Configuration folder does not exist"
-    exit 1
-fi
+echo "Creating configuration folder"
+mkdir -p ${home_config_dir}
 
 echo "Copying configurations..."
 
-# Get font configuration
-current_conf=fontconfig
-if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp ${config_dir}/${current_conf}/fonts.conf ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
-fi
+cp -r ${master_config_dir}/* ${home_config_dir}
 
-# Get Foot Terminal configuration
-current_conf=foot
-if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp ${config_dir}/${current_conf}/foot.ini ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
-fi
+echo "Building waybar configuration..."
 
-# Get rofi Terminal configuration
-current_conf=rofi
-if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp ${config_dir}/${current_conf}/config.rasi ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
-fi
+waybar_config_dir=${home_config_dir}/waybar
+comment_line_num=$(grep "// INSERT INITIAL CONFIG HERE" ${waybar_config_dir}/base_config.jsonc -n | cut -f1 -d:)
+head -n $((line_number_temp - 1)) ${waybar_config_dir}/base_config.jsonc >> ${waybar_config_dir}/config.jsonc
+cat ${waybar_config_dir}/config_laptop.jsonc >> ${waybar_config_dir}/config.jsonc
+tail -n +$((line_number_temp + 1)) ${waybar_config_dir}/base_config.jsonc >> ${waybar_config_dir}/config.jsonc
 
-# Get Sway configuration
-current_conf=sway
-if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp ${config_dir}/${current_conf}/config ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
-fi
+rm ${waybar_config_dir}/base_config.jsonc
+rm ${waybar_config_dir}/config_*.jsonc
 
-# Get Waybar configuration
-current_conf=waybar
-if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp -r ${config_dir}/${current_conf}/* ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
-fi
-
-
+echo "Waybar configuration built!"
