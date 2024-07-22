@@ -1,0 +1,10 @@
+/* Theme Basics */
+@define-color border-base #427D9D
+@define-color font-color-base #DDF2FD;
+
+
+/* Status colors  */
+@define-color okay-color #7BF768;
+@define-color warning-color #F5F768;
+@define-color critical-color #F25050;
+

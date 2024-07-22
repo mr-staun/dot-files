@@ -1,7 +1,3 @@
-@define-color okay-color #7BF768;
-@define-color warning-color #F5F768;
-@define-color critical-color #F25050;
-
 #backlight,
 #battery,
 #clock,
@@ -11,8 +7,8 @@
 #pulseaudio,
 #temperature {
     background-color: transparent;
-    border-bottom: 3px solid #427D9D;
-    color: #DDF2FD;
+    border-bottom: 3px solid @border-base;
+    color: @font-color-base;
     padding: 7px 7px;
     margin: 0 8px;
 }

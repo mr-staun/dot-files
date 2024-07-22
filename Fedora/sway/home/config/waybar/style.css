@@ -1,3 +1,5 @@
+@import "theme/squeaky_blue.css";
+
 @import "groups/backlight.css";
 @import "groups/battery.css";
 @import "groups/clock.css";
