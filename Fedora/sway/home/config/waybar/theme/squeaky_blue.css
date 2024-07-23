@@ -1,5 +1,6 @@
 /* Theme Basics */
-@define-color border-base #427D9D
+@define-color border-active #427D9D;
+@define-color border-inactive #164863;
 @define-color font-color-base #DDF2FD;
 
 
