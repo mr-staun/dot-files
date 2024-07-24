@@ -1,11 +1,11 @@
 @import "theme/squeaky_blue.css";
 
-@import "groups/backlight.css";
-@import "groups/battery.css";
-@import "groups/clock.css";
-@import "groups/groups.css";
-@import "groups/network.css";
-@import "groups/system.css";
+@import "components/backlight.css";
+@import "components/battery.css";
+@import "components/clock.css";
+@import "components/components.css";
+@import "components/network.css";
+@import "components/system.css";
 
 * {
     border: none;
@@ -13,7 +13,7 @@
     font-family: "Jetbrains Mono", "Font Awesome 6 Free", sans-serif;
 
     /* adjust font-size value to your liking: */
-    font-size: 12px;
+    font-size: 14px;
 
     min-height: 0;
 }

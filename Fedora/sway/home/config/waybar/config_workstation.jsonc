@@ -1,8 +1,8 @@
     "include": [
-        "~/.config/waybar/groups/clock.jsonc",
-        "~/.config/waybar/groups/network.jsonc",
-        "~/.config/waybar/groups/sound.jsonc",
-        "~/.config/waybar/groups/system.jsonc"
+        "~/.config/waybar/components/clock.jsonc",
+        "~/.config/waybar/components/network.jsonc",
+        "~/.config/waybar/components/sound.jsonc",
+        "~/.config/waybar/components/system.jsonc"
     ],
     "position": "top",
     // Choose the order of the modules
