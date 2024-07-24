@@ -1,6 +1,15 @@
 #/bin/bash
 set -e
 
+backup_home_config () {
+    if [[ ! -f $1 ]]; then
+        echo "File '$1' does not exist or is invalid! Copy failed."
+    else
+        echo "Copying file '$1' from home directory..."
+        cp $1 ~/.$1
+    fi
+}
+
 config_dir=~/.config
 target_dir=./config
 
@@ -8,6 +17,10 @@ if [ ! -d  ${config_dir} ]; then
     echo "Configuration folder does not exist"
     exit 1
 fi
+
+backup_home_config bashrc;
+backup_home_config inputrc;
+backup_home_config bash_profile;
 
 echo "Copying configurations..."
 
