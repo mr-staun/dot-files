@@ -1,7 +1,8 @@
 #/bin/bash
+set -e
 
 config_dir=~/.config
-target_dir=./home/config
+target_dir=./config
 
 if [ ! -d  ${config_dir} ]; then
     echo "Configuration folder does not exist"
