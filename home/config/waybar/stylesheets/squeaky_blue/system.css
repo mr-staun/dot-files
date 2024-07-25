@@ -1,0 +1,39 @@
+#cpu,
+#memory,
+#temperature {
+    padding: 7px 7px;
+    margin: 0 0;
+}
+
+#system_state {
+    margin: 0 8px;
+}
+
+#cpu.medium {
+    color: @warning-color;
+    border-bottom-color: @warning-color;
+}
+
+#cpu.high {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}
+
+#memory.medium {
+    color: @warning-color;
+    border-bottom-color: @warning-color;
+}
+
+#memory.high {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}
+
+#temperature {
+    
+}
+
+#temperature.critical {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}

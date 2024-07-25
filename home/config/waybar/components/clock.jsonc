@@ -1,0 +1,14 @@
+{
+    "group/clock_state": {
+        
+        "orientation": "horizontal",
+        "modules": [
+            "clock"
+        ]
+    },
+    "clock": {
+        "format": "{:%I:%M }",
+        "format-alt": "{:%Y-%m-%d}"
+      
+    }
+}

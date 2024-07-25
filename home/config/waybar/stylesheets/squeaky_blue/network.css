@@ -1,0 +1,12 @@
+#network {
+    /* background-color: transparent;
+    border-bottom: 3px solid pink;
+    color: #E0E1DD;
+    padding: 7px 7px;
+    margin: 0 8px; */
+}
+
+#network.disconnected {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}

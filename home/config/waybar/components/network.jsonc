@@ -1,0 +1,16 @@
+{
+    "group/network_state": {
+        
+        "orientation": "horizontal",
+        "modules": [
+            "network"
+        ]
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format-linked": "{ifname} (No IP) <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format-disconnected": "Disconnected ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    }
+}

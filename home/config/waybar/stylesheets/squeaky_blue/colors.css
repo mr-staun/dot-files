@@ -1,0 +1,12 @@
+/* Theme Basics */
+@define-color border-active #427D9D;
+@define-color border-inactive #164863;
+@define-color font-color-base #DDF2FD;
+@define-color waybar-bg #09121C;
+@define-color workspace-bg-active #0f1d2e;
+
+
+/* Status colors  */
+@define-color okay-color #7BF768;
+@define-color warning-color #F5F768;
+@define-color critical-color #F25050;

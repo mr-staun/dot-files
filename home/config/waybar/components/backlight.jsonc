@@ -1,0 +1,15 @@
+{
+    "group/backlight_state": {
+        
+        "orientation": "horizontal",
+        "modules": [
+            "backlight"
+        ]
+    },
+    "backlight": {
+        "format": "{percent}% <span font-family=\"Font Awesome 6 Free\">{icon}</span>",
+        "format-icons": [""],
+        "tooltip": true,
+        "tooltip-format": "Backlight Percentage"
+    }
+}

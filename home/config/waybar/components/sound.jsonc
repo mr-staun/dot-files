@@ -1,0 +1,19 @@
+{
+    "group/sound_state": {
+        
+        "orientation": "horizontal",
+        "modules": [
+            "pulseaudio"
+        ]
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% <span font-family=\"Font Awesome 6 Free\"></span> {format_source}",
+        "format-bluetooth": "{volume}%  {format_source}",
+        "format-bluetooth-muted": " <span font-family=\"Font Awesome 6 Free\">🕨</span> {format_source}",
+        "format-muted": "{volume}% <span font-family=\"Font Awesome 6 Free\"></span> {format_source}",
+        "format-source": "{volume}% <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format-source-muted": " <span font-family=\"Font Awesome 6 Free\"></span>",
+        "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
+    }
+}

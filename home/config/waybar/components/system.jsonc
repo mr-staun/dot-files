@@ -1,0 +1,42 @@
+{
+    "group/system_state": {
+        
+        "orientation": "horizontal",
+        "modules": [
+            "cpu",
+            "memory",
+            "temperature"
+        ]
+    },
+    "cpu": {
+        "class": "status_group",
+        "format": "{usage}% <span font-family=\"Font Awesome 6 Free\"></span>",
+        "interval": 5,
+        "states": {
+            "low": 0,
+            "medium": 50,
+            "high": 85
+        },
+        "tooltip": true,
+	    "tooltip-format": "CPU Usage"
+    },
+    "memory": {
+        "class": "status_group",
+        "format": "{}% <span font-family=\"Font Awesome 6 Free\"></span>",
+        "interval": 5,
+        "states": {
+            "low": 0,
+            "medium": 50,
+            "high": 85
+        },
+        "tooltip": true,
+        "tooltip-format": "Memory Usage"
+    },
+    "temperature": {
+        "class": "status_group",
+        "critical-threshold": 75,
+        "format-critical": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
+        "interval": 5
+    }
+}
