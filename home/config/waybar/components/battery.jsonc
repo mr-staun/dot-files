@@ -12,7 +12,7 @@
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} ",
         "format-icons": ["", "", "", "", ""],
-        "interval": 30,
+        "interval": 10,
         "states": {
             "high": 95,
             "medium": 50,
