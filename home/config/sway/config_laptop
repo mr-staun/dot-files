@@ -1,0 +1,13 @@
+# Read `man 5 sway-input` for more information about this section.
+input "1267:12432:ELAN1200:00_04F3:3090_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    pointer_accel 0.6
+}
+
+
+# Brightness keyboard shortcuts
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
