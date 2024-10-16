@@ -37,6 +37,15 @@ echo "Copying configurations..."
 
 cp -r ${master_config_dir}/* ${home_config_dir}
 
+### SWAY
+echo "Building sway configuration..."
+sway_config_dir=${home_config_dir}/sway
+
+echo "include config_"$1 >> ${sway_config_dir}/config
+echo "" >> ${sway_config_dir}/config
+
+
+### WAYBAR
 echo "Building waybar configuration..."
 
 waybar_config_dir=${home_config_dir}/waybar

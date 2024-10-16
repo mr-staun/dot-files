@@ -51,9 +51,7 @@ fi
 # Get Sway configuration
 current_conf=sway
 if [ -d ${config_dir}/${current_conf} ]; then
-    mkdir -p ${target_dir}/${current_conf}
-    cp ${config_dir}/${current_conf}/config ${target_dir}/${current_conf}
-    echo "Completed copy of '${current_conf}' configuration!"
+    echo "Waybar configuration was found. This cannot be backed up automatically. Make sure you backup changes accordingly"
 fi
 
 # Get Waybar configuration
@@ -61,5 +59,3 @@ current_conf=waybar
 if [ -d ${config_dir}/${current_conf} ]; then
     echo "Waybar configuration was found. This cannot be backed up automatically. Make sure you backup changes accordingly"
 fi
-
-
