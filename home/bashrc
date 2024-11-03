@@ -12,6 +12,8 @@ HISTFILESIZE=10000
 # Ignore commands that start with a space
 HISTCONTROL=ignorespace
 
+alias gitroot='cd $(git rev-parse --show-toplevel)'
+
 # Load inputrc settings
 if [ -f ~/.inputrc ]; then
     bind -f ~/.inputrc
