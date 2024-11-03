@@ -1,19 +1,7 @@
-configuration {
+config {
     modi: "drun,run";
     font: "mono 10";
     show-icons: true;
 }
 
-/* style the window */
-window {
-    width: 30%;
-    location: center;
-    y-offset: 0;
-    x-offset: 0;
-    anchor: center;
-    fullscreen: false;
-    border: 0;
-    padding: 5;
-    border-radius: 5;
-}
-
+@import "squeaky_blue.rasi" 

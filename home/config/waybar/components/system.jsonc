@@ -11,7 +11,7 @@
     "cpu": {
         "class": "status_group",
         "format": "{usage}% <span font-family=\"Font Awesome 6 Free\"></span>",
-        "interval": 5,
+        "interval": 3,
         "states": {
             "low": 0,
             "medium": 50,
@@ -23,7 +23,7 @@
     "memory": {
         "class": "status_group",
         "format": "{}% <span font-family=\"Font Awesome 6 Free\"></span>",
-        "interval": 5,
+        "interval": 3,
         "states": {
             "low": 0,
             "medium": 50,
@@ -37,6 +37,6 @@
         "critical-threshold": 75,
         "format-critical": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
         "format": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
-        "interval": 5
+        "interval": 3
     }
 }
