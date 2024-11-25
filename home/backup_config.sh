@@ -6,7 +6,7 @@ backup_home_config () {
         echo "File '$1' does not exist or is invalid! Copy failed."
     else
         echo "Copying file '$1' from home directory..."
-        cp $1 ~/.$1
+        cp ~/.$1 $1
     fi
 }
 
