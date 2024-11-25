@@ -59,3 +59,6 @@ r = reset
 # Slideshow control
 t = slideshow +1
 <Shift+T> = slideshow -1
+
+# Custom commands
+<Shift+D> = exec rm "$imv_current_file"; next
