@@ -5,10 +5,9 @@ if ! [ $(id -u) = 0 ]; then
   exit 1
 fi
 
-echo "Enabling repository for notifications"
-dnf copr enable erikreider/SwayNotificationCenter
-
 echo "Initiating Sway base install"
+
+dnf group install hardware-support
 
 dnf install \
     bash-completion \
@@ -16,15 +15,14 @@ dnf install \
     foot \
     git \
     gvfs-mtp \
-    @"Hardware Support" \
     htop \
     imv \
     jetbrains-mono-fonts \
     lm_sensors \
     NetworkManager-wifi \
+    nmtui \
     rofi \
     sway \
-    SwayNotificationCenter \
     tar \
     thunar \
     unzip \
