@@ -25,6 +25,7 @@ elif [[ "$1" == "genoa" ]]; then
     echo "Creating configuration for '$1'"
 elif [[ "$1" == "venezia" ]]; then
     is_laptop=1
+    temperature_file=/sys/class/thermal/thermal_zone7/temp
     echo "Creating configuration for '$1'"
 else
     echo "Error! Hostname is not valid! This hostname does not exist"
