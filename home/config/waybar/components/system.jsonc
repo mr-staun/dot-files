@@ -37,6 +37,7 @@
         "critical-threshold": 75,
         "format-critical": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
         "format": "{temperatureC}°C <span font-family=\"Font Awesome 6 Free\"></span>",
+        // INSERT TEMP PATH HERE
         "interval": 3
     }
 }

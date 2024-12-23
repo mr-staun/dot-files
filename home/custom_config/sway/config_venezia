@@ -1,0 +1,14 @@
+# Read `man 5 sway-input` for more information about this section.
+
+# Dell laptop
+input "1160:4122:VEN_0488:00_0488:101A_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+    pointer_accel 0.8
+}
+
+# Brightness keyboard shortcuts
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-

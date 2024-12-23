@@ -8,6 +8,6 @@ fi
 echo "Installing extras"
 
 dnf install \
-    light
+    brightnessctl
 
 echo "Extras installed successfully!"

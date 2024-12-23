@@ -1,4 +1,5 @@
 # Read `man 5 sway-input` for more information about this section.
+# Asus laptop
 input "1267:12432:ELAN1200:00_04F3:3090_Touchpad" {
     dwt enabled
     tap enabled
@@ -7,7 +8,6 @@ input "1267:12432:ELAN1200:00_04F3:3090_Touchpad" {
     pointer_accel 0.8
 }
 
-
 # Brightness keyboard shortcuts
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
