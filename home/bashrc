@@ -14,6 +14,7 @@ HISTCONTROL=ignorespace
 
 alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias cdgit='cd ~/Projects/personal'
+alias adios='shutdown -P now'
 
 # Load inputrc settings
 if [ -f ~/.inputrc ]; then
