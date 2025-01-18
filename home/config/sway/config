@@ -21,9 +21,9 @@ set $term foot
 set $menu rofi -show drun -show-icons
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+
+# Wallpaper
+output * bg /home/peter/Images/wallpapers/default.image fill
 
 ### Key bindings
 #

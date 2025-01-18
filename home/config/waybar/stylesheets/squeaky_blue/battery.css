@@ -1,15 +1,3 @@
-#battery {
-    /* background-color: transparent;
-    border-bottom: 3px solid pink;
-    color: #E0E1DD;
-    padding: 7px 7px;
-    margin: 0 8px; */
-}
-
-#battery.charging {
-    color: #ffffff;
-}
-
 #battery.medium {
     color: @warning-color;
     border-bottom-color: @warning-color;

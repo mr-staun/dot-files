@@ -1,7 +1,6 @@
 #backlight {
     background-color: transparent;
-    border-bottom: 3px solid pink;
-    color: #E0E1DD;
+    border-bottom: 3px solid;
     padding: 7px 7px;
     margin: 0 8px;
 }
