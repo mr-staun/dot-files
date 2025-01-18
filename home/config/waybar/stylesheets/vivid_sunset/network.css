@@ -1,0 +1,4 @@
+#network.disconnected {
+    color: @critical-color;
+    border-bottom-color: @critical-color;
+}
