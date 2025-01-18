@@ -3,7 +3,8 @@
 @define-color border-inactive #670FBF;
 @define-color font-color-base #F6CC5C;
 @define-color waybar-bg #696AF5;
-@define-color workspace-bg-active #6D88FB;
+@define-color workspace-bg #C55D84;
+@define-color workspace-bg-active #8112C9;
 
 
 /* Status colors  */
