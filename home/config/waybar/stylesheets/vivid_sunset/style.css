@@ -5,6 +5,7 @@
 @import "clock.css";
 @import "components.css";
 @import "network.css";
+@import "sound.css";
 @import "system.css";
 
 * {
@@ -29,7 +30,7 @@ window#waybar {
 }
 
 #workspaces {
-    background-color: alpha(@workspace-bg, 0.3);
+    background-color: alpha(@gradient-1, 0.9);
     border-radius: 25px;
 }
 

@@ -1,3 +1,7 @@
+#sound_state {
+    background-color: alpha(@gradient-4, 0.5);
+}
+
 #pulseaudio {
 
 }

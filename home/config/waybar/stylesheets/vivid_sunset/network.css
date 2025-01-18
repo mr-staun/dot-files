@@ -1,3 +1,7 @@
+#network_state {
+    background-color: alpha(@gradient-2, 0.8);
+}
+
 #network.disconnected {
     color: @critical-color;
     border-bottom-color: @critical-color;

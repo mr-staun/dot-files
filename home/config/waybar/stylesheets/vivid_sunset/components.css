@@ -1,3 +1,13 @@
+#network_state,
+#system_state,
+#sound_state,
+#backlight_state,
+#battery_state,
+#clock_state {
+    border-radius: 8px;
+    margin: 0 2px;
+}
+
 #backlight,
 #battery,
 #clock,
@@ -7,7 +17,7 @@
 #pulseaudio,
 #temperature {
     background-color: transparent;
-    border-radius: 8px;
-    padding: 7px 10px;
+    padding: 7px 7px;
     margin: 0 8px;
 }
+

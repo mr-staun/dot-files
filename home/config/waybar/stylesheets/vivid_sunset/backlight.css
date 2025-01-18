@@ -1,6 +1,9 @@
+#backlight_state {
+    background-color: alpha(@gradient-5, 0.4);
+}
+
 #backlight {
     background-color: transparent;
-    border-bottom: 3px solid;
     padding: 7px 7px;
     margin: 0 8px;
 }

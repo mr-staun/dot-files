@@ -6,6 +6,7 @@
 }
 
 #system_state {
+    background-color: alpha(@gradient-3, 0.7);
     margin: 0 8px;
 }
 
