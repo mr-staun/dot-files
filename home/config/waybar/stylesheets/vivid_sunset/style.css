@@ -29,6 +29,11 @@ window#waybar {
     /* border-radius: 0; */
 }
 
+tooltip {
+    background: alpha(@hover-msg-bg, 0.8);
+    /* border: 1px solid rgba(100, 114, 125, 0.5); */
+}
+
 #workspaces {
     background-color: alpha(@gradient-1, 0.9);
     border-radius: 25px;
