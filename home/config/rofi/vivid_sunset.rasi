@@ -1,13 +1,12 @@
 /*******************************************************************************
-THEME: Squeaky Blue
-ACKNOWLEDGMENT: https://github.com/newmanls/rofi-themes-collection/blob/master/themes/rounded-nord-dark.rasi
+THEME: Vivid Sunset
 *******************************************************************************/
 
 * {
-    menubg:    #09121C;
-    inputbg:    #3B4252;
-    bg2:    #4C566A80;
-    selectedbg:    #88C0D0F2;
+    menubg:    #C77594;
+    inputbg:    #8F3FA4;
+    bg2:    #A1519F;
+    selectedbg:    #691AAF;
 
     fontnormal: #DDF2FD;
 
@@ -62,8 +61,8 @@ element-text {
 
 entry {
     placeholder:        "Search";
-    placeholder-color:  #4C566A;
-    text-color: @selectedbg;
+    placeholder-color:  @fontnormal;
+    text-color: @fontnormal;
 }
 
 inputbar {
