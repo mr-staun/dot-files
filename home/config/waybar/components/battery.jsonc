@@ -10,13 +10,13 @@
         "format": "{capacity}% <span font-family=\"Font Awesome 6 Free\">{icon}</span>",
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
-        "format-alt": "{time} ",
+        "tooltip-format": "{time}",
         "format-icons": ["", "", "", "", ""],
         "interval": 10,
         "states": {
             "high": 95,
             "medium": 50,
-            "low": 25
+            "low": 30
         }
     }
 }

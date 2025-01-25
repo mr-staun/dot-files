@@ -1,6 +1,10 @@
-#backlight {
+#clock_state {
+    background-color: alpha(@gradient-7, 0.2);
+}
+
+
+#clock {
     background-color: transparent;
-    border-bottom: 3px solid;
     padding: 7px 7px;
     margin: 0 8px;
 }

@@ -7,10 +7,11 @@
         ]
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) <span font-family=\"Font Awesome 6 Free\"></span>",
+        "format-wifi": "{signalStrength}% <span font-family=\"Font Awesome 6 Free\"></span>",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} <span font-family=\"Font Awesome 6 Free\"></span>",
         "format-linked": "{ifname} (No IP) <span font-family=\"Font Awesome 6 Free\"></span>",
         "format-disconnected": "Disconnected ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) <span font-family=\"Font Awesome 6 Free\"></span>",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     }
 }

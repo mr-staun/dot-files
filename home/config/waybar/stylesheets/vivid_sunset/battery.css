@@ -1,3 +1,7 @@
+#battery_state {
+    background-color: alpha(@gradient-6, 0.3);
+}
+
 #battery.medium {
     color: @warning-color;
     border-bottom-color: @warning-color;
