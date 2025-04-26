@@ -1,6 +1,7 @@
 import argparse
 import logging
 from pathlib import Path
+import shutil
 import sys
 
 
@@ -32,7 +33,7 @@ def parse_arguments(args):
 
     parser = argparse.ArgumentParser(prog="build-config", description="CLI tool that builds and copies dot-files to the right locations")
 
-    parser.add_argument("-o", "--output-dir", type=str, required=False, metavar="OUTPUT_DIR", help="Specify a directory to scan for images.")
+    parser.add_argument("-o", "--output-dir", type=str, required=False, dest="output_dir", metavar="OUTPUT_DIR", help="Specify a directory to scan for images.")
 
     parser.add_argument("--host", type=str, required=False, help="Build configuration using an overlay for a specific host.")
 
@@ -50,36 +51,43 @@ def main(args):
     parsed_args = parse_arguments(args)
     logger = create_logger(parsed_args.log_level)
 
+    output_dir = Path(parsed_args.output_dir)
+    logger.debug(f"Output directory was set to {str(output_dir)}")
+
+    # Validate output directory
+    if not output_dir.is_dir():
+        logger.error(f"Output directory '{output_dir} is not valid!")
+        sys.exit(1)
+    
+    if not output_dir.exists():
+        logger.error(f"Output directory '{output_dir} does not exist!")
+        sys.exit(1)
+
     # Get the scipt and root directory
     script_dir = Path(__file__).resolve().parent
     logger.debug(f"Script directory is {script_dir}")
-    root_dir = script_dir.parent()
+    root_dir = script_dir.parent
     logger.debug(f"Root directory of dot-files is {root_dir}")
 
     # Get necessary dirs to copy and build config
-    config_dir = root_dir + "config"
+    config_dir = root_dir / "config"
     logger.debug(f"Config directory is {config_dir}")
-    overlays_dir = config_dir + "overlays"
+    overlays_dir = config_dir / "overlays"
     logger.debug(f"Overlays directory is {overlays_dir}")
-    home_dir = root_dir + "home"
-    logger.debug(f"Home config directory is {home_dir}")
+    home_config_dir = root_dir / "home"
+    logger.debug(f"Home config directory is {home_config_dir}")
 
-def copy_dot_files(target_dir: Path, destination_dir: Path, dry_run: bool, logger):
-    if not target_dir.is_dir():
-        raise ValueError(f"Target directory '{destination_dir} is not valid!")
-    
-    if not target_dir.exists():
-        raise FileNotFoundError(f"Target directory '{destination_dir} does not exist!")
-        
-    if not destination_dir.is_dir():
-        raise ValueError(f"Destination directory '{destination_dir} is not valid!")
-    
-    if not destination_dir.exists():
-        raise FileNotFoundError(f"Destination directory '{destination_dir} does not exist!")
+    logger.info("Copying home dot files")
 
-    for dot_file in target_dir.rglob("*"):
-        if dot_file.is_dir():
-
+    # Copy dot files to Home/Destination directory
+    for dot_file in home_config_dir.rglob("*"):
+        if dot_file.is_file():
+            dest_path = output_dir / ("." + dot_file.name)
+            if parsed_args.dry_run:
+                logger.info(f"Dry run of copying dot file '{dot_file}' to '{dest_path}'")
+            else:
+                logger.debug(f"Copying dot file '{dot_file}' to '{dest_path}'")
+                shutil.copy(str(dot_file), str(dest_path))
 
 
 if __name__ == "__main__":
