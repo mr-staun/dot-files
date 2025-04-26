@@ -33,7 +33,8 @@ def parse_arguments(args):
 
     parser = argparse.ArgumentParser(prog="build-config", description="CLI tool that builds and copies dot-files to the right locations")
 
-    parser.add_argument("-o", "--output-dir", type=str, required=False, dest="output_dir", metavar="OUTPUT_DIR", help="Specify a directory to scan for images.")
+    parser.add_argument("-o", "--output-dir", type=str, required=False, dest="output_dir", metavar="OUTPUT_DIR", help="Specify a directory to scan for images. " \
+    "Defaults to home directory if not set.")
 
     parser.add_argument("--host", type=str, required=False, help="Build configuration using an overlay for a specific host.")
 
@@ -51,7 +52,11 @@ def main(args):
     parsed_args = parse_arguments(args)
     logger = create_logger(parsed_args.log_level)
 
-    output_dir = Path(parsed_args.output_dir)
+    if parsed_args.output_dir is None:
+        output_dir = Path.home()
+    else:
+        output_dir = Path(parsed_args.output_dir).resolve()
+
     logger.debug(f"Output directory was set to {str(output_dir)}")
 
     # Validate output directory
@@ -63,14 +68,14 @@ def main(args):
         logger.error(f"Output directory '{output_dir} does not exist!")
         sys.exit(1)
 
-    # Get the scipt and root directory
+    # Get the script directory and root directory
     script_dir = Path(__file__).resolve().parent
     logger.debug(f"Script directory is {script_dir}")
     root_dir = script_dir.parent
     logger.debug(f"Root directory of dot-files is {root_dir}")
 
     # Get necessary dirs to copy and build config
-    config_dir = root_dir / "config"
+    config_dir = root_dir / "config" / "common"
     logger.debug(f"Config directory is {config_dir}")
     overlays_dir = config_dir / "overlays"
     logger.debug(f"Overlays directory is {overlays_dir}")
@@ -88,7 +93,17 @@ def main(args):
             else:
                 logger.debug(f"Copying dot file '{dot_file}' to '{dest_path}'")
                 shutil.copy(str(dot_file), str(dest_path))
+    
+    # Copy config files
+    output_config_dir = output_dir / ".config"
+    output_config_dir.mkdir(parents=False, exist_ok=True)
 
+    if parsed_args.dry_run:
+        logger.info(f"Dry run - Copying config directory '{config_dir}' to '{output_config_dir}'")
+    else:
+        logger.debug(f"Copying config directory '{config_dir}' to '{output_config_dir}'")
+        shutil.copytree(config_dir, output_config_dir, dirs_exist_ok=True)
+        logger.info(f"Copied config directory to '{output_config_dir}'")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
