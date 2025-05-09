@@ -38,7 +38,6 @@ def parse_arguments(args):
 
     parser.add_argument("--host", type=str, required=False, help="Build configuration using an overlay for a specific host.")
 
-
     parser.add_argument("--dry-run", action="store_true", default=False, help="Flag to specify a dry-run. No changes are written, only shows changes to be made.")
 
     default_log_level = "DEBUG"
@@ -61,11 +60,7 @@ def main(args):
 
     # Validate output directory
     if not output_dir.is_dir():
-        logger.error(f"Output directory '{output_dir} is not valid!")
-        sys.exit(1)
-    
-    if not output_dir.exists():
-        logger.error(f"Output directory '{output_dir} does not exist!")
+        logger.error(f"Output directory '{output_dir}' is not valid or does not exist!")
         sys.exit(1)
 
     # Get the script directory and root directory
@@ -76,10 +71,22 @@ def main(args):
 
     # Get necessary dirs to copy and build config
     config_dir = root_dir / "config" / "common"
+    if not config_dir.is_dir():
+        logger.error(f"Error! Common config directory does not exist! Expected '{config_dir}'")
+        return 1
     logger.debug(f"Config directory is {config_dir}")
-    overlays_dir = config_dir / "overlays"
+
+
+    overlays_dir = root_dir / "config" / "overlays"
+    if not overlays_dir.is_dir():
+        logger.error(f"Error! Overlays directory does not exist! Expected '{overlays_dir}'")
+        return 1
     logger.debug(f"Overlays directory is {overlays_dir}")
+
     home_config_dir = root_dir / "home"
+    if not home_config_dir.is_dir():
+        logger.error(f"Error! Dot files directory does not exist! Expected '{home_config_dir}'")
+        return 1
     logger.debug(f"Home config directory is {home_config_dir}")
 
     logger.info("Copying home dot files")
@@ -104,6 +111,27 @@ def main(args):
         logger.debug(f"Copying config directory '{config_dir}' to '{output_config_dir}'")
         shutil.copytree(config_dir, output_config_dir, dirs_exist_ok=True)
         logger.info(f"Copied config directory to '{output_config_dir}'")
+
+    logger.info(f"Building configuration overlays for host '{parsed_args.host}'")
+
+    # Ensure that at least one overlay exists for a given host
+    # If none exist, its an invalid overlay
+    host_exists = False
+    for overlay_file in overlays_dir.rglob("*"):
+        if overlay_file.is_file():
+            stripped_file_name = overlay_file.stem.lstrip("config_")
+            if stripped_file_name == parsed_args.host:
+                logger.debug(f"Overlay file '{overlay_file}' matches host '{parsed_args.host}'")
+                host_exists = True
+                break
+            else:
+                logger.debug(f"Overlay file '{overlay_file}' does not match host '{parsed_args.host}'")
+            
+
+    if not host_exists:
+        logger.error(f"Error! Overlay files do not exist for host '{parsed_args.host}'")
+        return 1
+            
 
 if __name__ == "__main__":
     main(sys.argv[1:])
