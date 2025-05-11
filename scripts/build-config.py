@@ -29,6 +29,19 @@ def create_logger(log_level: str):
 
     return logger
 
+def get_overlay_file(host: str, overlay_path: Path, logger) -> Path | None:
+    for overlay_file in overlay_path.rglob("*"):
+        if overlay_file.is_file():
+            stripped_file_name = overlay_file.stem.lstrip("config_")
+            if stripped_file_name == host.host:
+                logger.debug(f"Overlay file '{overlay_file}' matches host '{host}'")
+                return overlay_file
+            else:
+                logger.debug(f"Overlay file '{overlay_file}' does not match host '{host}'")
+    
+    return None
+
+
 def parse_arguments(args):
 
     parser = argparse.ArgumentParser(prog="build-config", description="CLI tool that builds and copies dot-files to the right locations")
@@ -113,22 +126,11 @@ def main(args):
         logger.info(f"Copied config directory to '{output_config_dir}'")
 
     logger.info(f"Building configuration overlays for host '{parsed_args.host}'")
+    
+    # Get sway overlay file
+    overlay_file = get_overlay_file(args.host, overlays_dir / "sway", logger)
 
-    # Ensure that at least one overlay exists for a given host
-    # If none exist, its an invalid overlay
-    host_exists = False
-    for overlay_file in overlays_dir.rglob("*"):
-        if overlay_file.is_file():
-            stripped_file_name = overlay_file.stem.lstrip("config_")
-            if stripped_file_name == parsed_args.host:
-                logger.debug(f"Overlay file '{overlay_file}' matches host '{parsed_args.host}'")
-                host_exists = True
-                break
-            else:
-                logger.debug(f"Overlay file '{overlay_file}' does not match host '{parsed_args.host}'")
-            
-
-    if not host_exists:
+    if overlay_file is None:
         logger.error(f"Error! Overlay files do not exist for host '{parsed_args.host}'")
         return 1
             
