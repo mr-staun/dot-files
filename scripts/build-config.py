@@ -119,7 +119,8 @@ def main(args):
     
     # Create config directory
     output_config_dir = output_dir / ".config"
-    output_config_dir.mkdir(parents=False, exist_ok=True)
+    if not parsed_args.dry_run:
+        output_config_dir.mkdir(parents=False, exist_ok=True)
 
     # Copy config to config directory
     if parsed_args.dry_run:
@@ -135,14 +136,25 @@ def main(args):
     overlay_name = "sway"
 
     # Get sway overlay file
-    overlay_file = get_overlay_file(parsed_args.host, dot_files_overlays_dir / overlay_name, logger)
+    sway_overlay_file = get_overlay_file(parsed_args.host, dot_files_overlays_dir / overlay_name, logger)
 
-    if overlay_file is None:
+    if sway_overlay_file is None:
         logger.warning(f"Warning: Overlay file for '{overlay_name}' do not exist for host '{parsed_args.host}'")
 
-    # Copy sway overlay file to dest and add "includes"
-    # overlay_file
-            
+    else:
+        # Copy sway overlay file to dest and add "includes"
+        output_sway_config_dir = output_dir / ".config" / "sway"
+        if parsed_args.dry_run:
+            logger.info(f"Dry run - Copying sway overlay file '{sway_overlay_file}' to '{output_sway_config_dir}'")
+            logger.info(f"Dry run - Include sway overlay file ('{sway_overlay_file.name}') in sway config ('{output_sway_config_dir}')")
+        else:
+            logger.debug(f"Copying sway overlay file '{sway_overlay_file}' to '{output_sway_config_dir}'")
+            shutil.copy2(sway_overlay_file, output_sway_config_dir)
+            logger.info(f"Copied sway overlay file to '{output_sway_config_dir}'")
+            # Include overlay file in sway config
+            with open(output_sway_config_dir / "config", "a") as f_open:
+                f_open.write(f"include {sway_overlay_file.name}\n")
+            logger.info(f"Include sway overlay file in sway config")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
