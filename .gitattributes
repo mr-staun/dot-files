@@ -1,0 +1,5 @@
+*.conf linguist-detectable
+*.json linguist-detectable
+*.jsonc linguist-detectable
+*.ini linguist-detectable
+*.rasi linguist-detectable
