@@ -1,3 +1,4 @@
+{
     "include": [
         "~/.config/waybar/components/backlight.jsonc",
         "~/.config/waybar/components/battery.jsonc",
@@ -18,4 +19,5 @@
         "group/battery_state",
         "group/clock_state",
         "tray"
-    ],
+    ]
+}
