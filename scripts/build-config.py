@@ -20,12 +20,14 @@ def create_logger(log_level: str):
     handler = logging.StreamHandler(sys.stdout)
     handler.setLevel(numeric_level)
     # Only have more logging data when debug is set
-    if numeric_level == 10:
+    if numeric_level == logging.DEBUG:
         formatter = logging.Formatter('%(asctime)s [%(filename)s:%(funcName)s] - %(levelname)s: %(message)s')
     else:
         formatter = logging.Formatter('%(message)s')
     handler.setFormatter(formatter)
-    logger.addHandler(handler)
+
+    if not logger.hasHandlers():
+        logger.addHandler(handler)
 
     return logger
 
@@ -33,7 +35,7 @@ def get_overlay_file(host: str, overlay_path: Path, logger) -> Path | None:
     for overlay_file in overlay_path.rglob("*"):
         if overlay_file.is_file():
             stripped_file_name = overlay_file.stem.lstrip("config_")
-            if stripped_file_name == host.host:
+            if stripped_file_name == host:
                 logger.debug(f"Overlay file '{overlay_file}' matches host '{host}'")
                 return overlay_file
             else:
@@ -46,7 +48,7 @@ def parse_arguments(args):
 
     parser = argparse.ArgumentParser(prog="build-config", description="CLI tool that builds and copies dot-files to the right locations")
 
-    parser.add_argument("-o", "--output-dir", type=str, required=False, dest="output_dir", metavar="OUTPUT_DIR", help="Specify a directory to scan for images. " \
+    parser.add_argument("-o", "--output-dir", type=str, required=False, dest="output_dir", metavar="OUTPUT_DIR", help="Directory where configuration will be copied to. " \
     "Defaults to home directory if not set.")
 
     parser.add_argument("--host", type=str, required=False, help="Build configuration using an overlay for a specific host.")
@@ -76,36 +78,37 @@ def main(args):
         logger.error(f"Output directory '{output_dir}' is not valid or does not exist!")
         sys.exit(1)
 
-    # Get the script directory and root directory
-    script_dir = Path(__file__).resolve().parent
-    logger.debug(f"Script directory is {script_dir}")
-    root_dir = script_dir.parent
-    logger.debug(f"Root directory of dot-files is {root_dir}")
+    # Get the Python script's directory and root directory
+    python_script_dir = Path(__file__).resolve().parent
+    logger.debug(f"Script directory is {python_script_dir}")
+    dot_files_root_dir = python_script_dir.parent
+    logger.debug(f"Root directory of dot-files is {dot_files_root_dir}")
 
-    # Get necessary dirs to copy and build config
-    config_dir = root_dir / "config" / "common"
-    if not config_dir.is_dir():
-        logger.error(f"Error! Common config directory does not exist! Expected '{config_dir}'")
+    # Confirm that common config directory exists
+    dot_files_config_dir = dot_files_root_dir / "config" / "common"
+    if not dot_files_config_dir.is_dir():
+        logger.error(f"Error! Common config directory does not exist! Expected '{dot_files_config_dir}'")
         return 1
-    logger.debug(f"Config directory is {config_dir}")
+    logger.debug(f"Config directory is {dot_files_config_dir}")
 
-
-    overlays_dir = root_dir / "config" / "overlays"
-    if not overlays_dir.is_dir():
-        logger.error(f"Error! Overlays directory does not exist! Expected '{overlays_dir}'")
+    # Confirm that overlays directory exists
+    dot_files_overlays_dir = dot_files_root_dir / "config" / "overlays"
+    if not dot_files_overlays_dir.is_dir():
+        logger.error(f"Error! Overlays directory does not exist! Expected '{dot_files_overlays_dir}'")
         return 1
-    logger.debug(f"Overlays directory is {overlays_dir}")
+    logger.debug(f"Overlays directory is {dot_files_overlays_dir}")
 
-    home_config_dir = root_dir / "home"
-    if not home_config_dir.is_dir():
-        logger.error(f"Error! Dot files directory does not exist! Expected '{home_config_dir}'")
+    # Confirm that target home directory exists
+    dot_files_home_config_dir = dot_files_root_dir / "home"
+    if not dot_files_home_config_dir.is_dir():
+        logger.error(f"Error! Dot files directory does not exist! Expected '{dot_files_home_config_dir}'")
         return 1
-    logger.debug(f"Home config directory is {home_config_dir}")
+    logger.debug(f"Home config directory is {dot_files_home_config_dir}")
 
     logger.info("Copying home dot files")
 
     # Copy dot files to Home/Destination directory
-    for dot_file in home_config_dir.rglob("*"):
+    for dot_file in dot_files_home_config_dir.rglob("*"):
         if dot_file.is_file():
             dest_path = output_dir / ("." + dot_file.name)
             if parsed_args.dry_run:
@@ -114,25 +117,31 @@ def main(args):
                 logger.debug(f"Copying dot file '{dot_file}' to '{dest_path}'")
                 shutil.copy(str(dot_file), str(dest_path))
     
-    # Copy config files
+    # Create config directory
     output_config_dir = output_dir / ".config"
     output_config_dir.mkdir(parents=False, exist_ok=True)
 
+    # Copy config to config directory
     if parsed_args.dry_run:
-        logger.info(f"Dry run - Copying config directory '{config_dir}' to '{output_config_dir}'")
+        logger.info(f"Dry run - Copying config directory '{dot_files_config_dir}' to '{output_config_dir}'")
     else:
-        logger.debug(f"Copying config directory '{config_dir}' to '{output_config_dir}'")
-        shutil.copytree(config_dir, output_config_dir, dirs_exist_ok=True)
+        logger.debug(f"Copying config directory '{dot_files_config_dir}' to '{output_config_dir}'")
+        shutil.copytree(dot_files_config_dir, output_config_dir, dirs_exist_ok=True)
         logger.info(f"Copied config directory to '{output_config_dir}'")
 
+    # ------- Overlay files -------
     logger.info(f"Building configuration overlays for host '{parsed_args.host}'")
-    
+
+    overlay_name = "sway"
+
     # Get sway overlay file
-    overlay_file = get_overlay_file(args.host, overlays_dir / "sway", logger)
+    overlay_file = get_overlay_file(parsed_args.host, dot_files_overlays_dir / overlay_name, logger)
 
     if overlay_file is None:
-        logger.error(f"Error! Overlay files do not exist for host '{parsed_args.host}'")
-        return 1
+        logger.warning(f"Warning: Overlay file for '{overlay_name}' do not exist for host '{parsed_args.host}'")
+
+    # Copy sway overlay file to dest and add "includes"
+    # overlay_file
             
 
 if __name__ == "__main__":
