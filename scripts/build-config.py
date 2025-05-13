@@ -109,6 +109,9 @@ def main(args):
 
     # Copy dot files to Home/Destination directory
     for dot_file in dot_files_home_config_dir.rglob("*"):
+        if dot_file.is_dir():
+            logger.error(f"Error! Found directory '{dot_file}' in home dot files. Directories belong inside '.config'")
+            return 1
         if dot_file.is_file():
             dest_path = output_dir / ("." + dot_file.name)
             if parsed_args.dry_run:
@@ -154,7 +157,7 @@ def main(args):
             # Include overlay file in sway config
             with open(output_sway_config_dir / "config", "a") as f_open:
                 f_open.write(f"include {sway_overlay_file.name}\n")
-            logger.info(f"Include sway overlay file in sway config")
+            logger.info(f"Add 'include' for sway overlay file in sway config")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
