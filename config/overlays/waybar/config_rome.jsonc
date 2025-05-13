@@ -1,6 +1,5 @@
+{
     "include": [
-        "~/.config/waybar/components/backlight.jsonc",
-        "~/.config/waybar/components/battery.jsonc",
         "~/.config/waybar/components/clock.jsonc",
         "~/.config/waybar/components/network.jsonc",
         "~/.config/waybar/components/sound.jsonc",
@@ -14,8 +13,7 @@
         "group/network_state",
         "group/system_state",
         "group/sound_state",
-        "group/backlight_state",
-        "group/battery_state",
         "group/clock_state",
         "tray"
-    ],
+    ]
+}
